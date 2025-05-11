@@ -2,7 +2,6 @@ const { Client, GatewayDispatchEvents } = require("discord.js");
 const { Riffy } = require("riffy");
 const { Spotify } = require("riffy-spotify");
 const config = require("./config.js");
-const prefix = require("./config.js");
 const messages = require("./utils/messages.js");
 const emojis = require("./emojis.js");
 
@@ -56,9 +55,7 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", async (message) => {
-    if (message.content = `<@1370776882307403898>`) {
-        message.reply(`Hey! My Prefix Is `!`.`)
-    }
+    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
     const args = message.content.slice(config.prefix.length).trim().split(" ");
     const command = args.shift().toLowerCase();
